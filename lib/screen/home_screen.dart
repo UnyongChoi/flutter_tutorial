@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sticker/component/main_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:sticker/component/footer.dart';
 import 'dart:io';
 
 class HomeScreen extends StatefulWidget {
@@ -29,11 +29,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPickImage: onPickImage,
                 onSaveImage: onSaveImage,
                 onDeleteImage: onDeleteImage),
-          )
+          ),
+          if (image != null) // ➌ image가 선택되면 Footer 위치하기
+            Positioned(
+              // 맨 아래에 Footer 위젯 위치하기
+              bottom: 0,
+              left: 0, // left와 right를 모두 0을 주면 좌우로 최대 크기를 차지함
+              right: 0,
+              child: Footer(
+                onEmoticonTap: onEmoticonTap,
+              ),
+            ),
         ],
       ),
     );
   }
+
+  void onEmoticonTap(int index) {}
 
   Widget renderBody() {
     if (image != null) {
